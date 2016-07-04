@@ -22,7 +22,7 @@ $text = trim($text);
 $text = strtolower($text);
 $tosent = "";
 $reply = false;
-	
+//commento di prova	
 if (stristr($text, 'ivan') !== false)
 {
 	$tosend = "Chi? Il paracarro di merda?";
