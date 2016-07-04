@@ -29,6 +29,12 @@ if (stristr($text, 'ivan') !== false)
 	$reply = true;
 }
 
+if (stristr($text, 'bug') !== false)
+{
+	$tosend = "ah perchè non è già stato corretto ieri?";
+	$reply = true;
+}
+
 if (stristr($text, 'caffè') !== false or stristr($text, 'caffe') !== false or stristr($text, 'coffee') !== false)
 {
 	$tosend = "COOOOOOSA!!!! Ai miei tempi avevamo una bombola da 33 cl di aria al giorno da respirare e tu vuoi un caffè?????";
