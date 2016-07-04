@@ -55,6 +55,16 @@ if (strpos($text, 'mattia') !== false)
 	$tosend = "Orbo, sbrigati a fare lo zip con il manuale dentro! Anzi fuori! No dentro!";
 	$reply = true;
 }
+if (strpos($text, 'buongiorno') !== false)
+{
+	$tosend = "non lo sarà!";
+	$reply = true;
+}
+if (strpos($text, 'sebastiano') !== false)
+{
+	$tosend = "a qualcuno interessa? http://www.ebay.it/itm/SALDATORE-A-STILO-STAGNO-STAGNATORE-60W-SALDA-SALDATRICE-ELETTRONICA-PRECISIONE-/321790233879?hash=item4aec314d17:g:uUMAAOSwHnFViZHt";
+	$reply = true;
+}
 
 
 if ($reply==true)
