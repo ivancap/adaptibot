@@ -29,6 +29,12 @@ if (stristr($text, 'ivan') !== false)
 	$reply = true;
 }
 
+if (stristr($text, 'checklist') !== false)
+{
+	$tosend = "Checklist? Ma non scherzare... voi softueristi non dovete fare bug.. e la checklist deve essere di un solo punto: va (si/no), con il check sul si!";
+	$reply = true;
+}
+
 if (stristr($text, 'bug') !== false)
 {
 	$tosend = "ah perchè non è già stato corretto ieri?";
