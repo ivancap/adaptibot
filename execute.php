@@ -105,7 +105,31 @@ if (strpos($text, 'quando') !== false)
 	$tosend = "era per ieri!";
 	$reply = true;
 }
-
+if (strpos($text, 'cacca') !== false)
+{
+	$tosend = "se devi andare in bagno, vai su quello delle donne, perchè nell'altro di sicuro c'è Villi!";
+	$reply = true;
+}
+if (strpos($text, 'dove') !== false)
+{
+	$tosend = "Se cerchi qualcosa, cerca nella scrivania di Seba o di Alessandro!";
+	$reply = true;
+}
+if (strpos($text, 'gianfranco') !== false)
+{
+	$tosend = "Ricorda la regola delle 10: nessuna interazione prima di allora, se vuoi sopravvivere!";
+	$reply = true;
+}
+if (strpos($text, 'il software non funziona') !== false)
+{
+	$tosend = "IMPOSSIBILE!";
+	$reply = true;
+}
+if (strpos($text, 'la misura') !== false)
+{
+	$tosend = "hai controllato che non fosse fuori fuoco?!";
+	$reply = true;
+}
 
 
 if ($reply==true)
