@@ -65,6 +65,47 @@ if (strpos($text, 'sebastiano') !== false)
 	$tosend = "a qualcuno interessa? http://www.ebay.it/itm/SALDATORE-A-STILO-STAGNO-STAGNATORE-60W-SALDA-SALDATRICE-ELETTRONICA-PRECISIONE-/321790233879?hash=item4aec314d17:g:uUMAAOSwHnFViZHt";
 	$reply = true;
 }
+if (strpos($text, 'gianfranco') !== false)
+{
+	$tosend = "Qualcuno lo chiami che è qui DHL";
+	$reply = true;
+}
+if (strpos($text, 'funziona') !== false)
+{
+	$tosend = "se funziona è grazie ai software man!";
+	$reply = true;
+}
+if (strpos($text, 'non funziona') !== false)
+{
+	$tosend = "colpa degli elettronici!";
+	$reply = true;
+}
+if (strpos($text, 'rotto') !== false)
+{
+	$tosend = "ha sfranzato?";
+	$reply = true;
+}
+if (strpos($text, '2win') !== false)
+{
+	$tosend = "ma che versione? la 4.1.86238746128936?";
+	$reply = true;
+}
+if (strpos($text, 'visionfit') !== false)
+{
+	$tosend = "muovetevi che ne devono uscire altri quattro.... entro ieri";
+	$reply = true;
+}
+if (strpos($text, 'impossibile') !== false)
+{
+	$tosend = "è solo perchè non hai voglia, ai miei tempi con un 486 mandavo gli uomini sulla luna";
+	$reply = true;
+}
+if (strpos($text, 'quando') !== false)
+{
+	$tosend = "era per ieri!";
+	$reply = true;
+}
+
 
 
 if ($reply==true)
