@@ -23,6 +23,19 @@ $text = strtolower($text);
 $tosent = "";
 $reply = false;
 //commento di prova	
+
+if (stristr($text, 'mino') !== false or stristr($text, 'cosmo') !== false)
+{
+	$tosend = "Mino!!!!! Le schede devono avere i connettori e non avere i connettori, chiaro?";
+	$reply = true;
+}
+
+if (stristr($text, 'giangi') !== false or stristr($text, 'gianluigi') !== false)
+{
+	$tosend = "He is the boss. Repeat with me... He is the boss...";
+	$reply = true;
+}
+
 if (stristr($text, 'ivan') !== false)
 {
 	$tosend = "Chi? Il paracarro di merda?";
