@@ -24,6 +24,13 @@ $tosent = "";
 $reply = false;
 //commento di prova	
 
+if (stristr($text, 'tommy') !== false or stristr($text, 'tommaso') !== false)
+{
+	$tosend = "...attualmente è in antartide... o forse in guatemala? Però non vi sembra rompa le balle uguale, come averlo qui!";
+	$reply = true;
+}
+
+
 if (stristr($text, 'mino') !== false or stristr($text, 'cosmo') !== false)
 {
 	$tosend = "Mino!!!!! Le schede devono avere i connettori e non avere i connettori, chiaro?";
