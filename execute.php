@@ -30,6 +30,18 @@ if (stristr($text, 'tommy') !== false or stristr($text, 'tommaso') !== false)
 	$reply = true;
 }
 
+if (stristr($text, 'card') !== false or stristr($text, 'cardullo') !== false)
+{
+	$tosend = "...orco... Andrea... che rompi maroni!";
+	$reply = true;
+}
+
+if (stristr($text, 'gigio') !== false)
+{
+	$tosend = "gigio ricchiò, hai prodotto 2win? Lenti? OHL? OFL? OKL? OML?";
+	$reply = true;
+}
+
 
 if (stristr($text, 'mino') !== false or stristr($text, 'cosmo') !== false)
 {
