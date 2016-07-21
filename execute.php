@@ -7,7 +7,7 @@ if(!$update)
 	exit;
 }
 
-$random = rand (0, 10);
+$random = rand (0, 7);
 
 
 $message = isset($update['message']) ? $update['message'] : "";
@@ -202,7 +202,7 @@ if (strpos($text, 'francesco') !== false)
 {
 	switch ($random) {
 		case 1:
-		$tosend = "...attualmente è in antartide... o forse in guatemala? Però non vi sembra rompa le balle uguale, come averlo qui!";    
+		$tosend = "DIO P....";    
 		break;
 		case 2:
 		$tosend = "pesante...";    
@@ -502,6 +502,9 @@ if (strpos($text, 'cacca') !== false)
 if (strpos($text, 'dove') !== false)
 {
 	switch ($random) {
+		case 6:
+		$tosend = "cerca la risposta dentro di te, epperò è sbagliata!";   
+		break;
 		default:
 	$tosend = "Se cerchi qualcosa, cerca nella scrivania di Seba o di Alessandro!";
 	}
