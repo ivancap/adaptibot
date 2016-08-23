@@ -29,11 +29,11 @@ $reply = false;
 
 
 //TEST
-header("Content-Type: application/json");
-$tosend = "ciao";
-$parameters = array('chat_id' => $chatId, "text" => $tosend);
-$parameters["method"] = "sendMessage";
-echo json_encode($parameters);
+//header("Content-Type: application/json");
+//$tosend = "ciao";
+//$parameters = array('chat_id' => $chatId, "text" => $tosend);
+//$parameters["method"] = "sendMessage";
+//echo json_encode($parameters);
 //TEST
 
 //commento di prova	
