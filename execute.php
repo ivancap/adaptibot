@@ -416,6 +416,7 @@ if (strpos($text, 'rotto') !== false)
 {
 	switch ($random) {
 
+
 		default:
 		$tosend = "ha sfranzato?";
 	}
