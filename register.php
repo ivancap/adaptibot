@@ -2,7 +2,7 @@
 
 // PARAMETRI DA MODIFICARE
 $WEBHOOK_URL = 'https://adaptibot.herokuapp.com/execute.php';
-$BOT_TOKEN = '{267610061:AAGiVLnt9U9YkVF_uyJWI_R5HK4kcpbUhF4}';
+$BOT_TOKEN = '267610061:AAGiVLnt9U9YkVF_uyJWI_R5HK4kcpbUhF4';
 
 // NON APPORTARE MODIFICHE NEL CODICE SEGUENTE
 $API_URL = 'https://api.telegram.org/bot' . $BOT_TOKEN .'/';
