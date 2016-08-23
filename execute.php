@@ -4,6 +4,7 @@ $update = json_decode($content, true);
 
 if(!$update)
 {
+ 
   exit;
 }
 
