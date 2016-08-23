@@ -7,6 +7,8 @@ if(!$update)
 	exit;
 }
 
+
+
 $random = rand (0, 7);
 
 
@@ -23,6 +25,17 @@ $text = trim($text);
 $text = strtolower($text);
 $tosent = "";
 $reply = false;
+
+
+
+//TEST
+header("Content-Type: application/json");
+$tosend = "ciao";
+$parameters = array('chat_id' => $chatId, "text" => $tosend);
+$parameters["method"] = "sendMessage";
+echo json_encode($parameters);
+//TEST
+
 //commento di prova	
 
 if (stristr($text, 'tommy') !== false or stristr($text, 'tommaso') !== false)
