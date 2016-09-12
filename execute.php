@@ -65,6 +65,30 @@ if (stristr($text, 'tommy') !== false or stristr($text, 'tommaso') !== false)
 	$reply = true;
 }
 
+if (stristr($text, 'fiera') !== false)
+{
+	switch ($random) {
+		case 1:
+		$tosend = "..è oggi, o domani, beh montiamo, no smontiamo, ma va in mona...";    
+		break;
+		case 2:
+		$tosend = "dobbiamo vendere 3400 pezzi, preparate gli uptates";    
+		break;
+		case 3:
+		$tosend = "Portate un bel po' di figa che tira più quella del visionfit";    
+		break;
+		case 4:
+		$tosend = "avete preparato 2 2win, 3 visionfit sc, 8 panini, 1 porchetta, 4 paia di stivali e l'ombrello?";    
+		break;
+		case 5:
+		$tosend = "questa è l'ultima possibilità, poi andiamo alla fiera del pesce";    
+		break;
+		default:
+		$tosend = "no.";    
+	}    
+	$reply = true;
+}
+
 if (stristr($text, 'card') !== false or stristr($text, 'cardullo') !== false)
 {
 	switch ($random) {
