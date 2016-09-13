@@ -89,6 +89,30 @@ if (stristr($text, 'fiera') !== false)
 	$reply = true;
 }
 
+if (stristr($text, 'fiera') !== false)
+{
+	switch ($random) {
+		case 1:
+		$tosend = "..è oggi, o domani, beh montiamo, no smontiamo, ma va in mona...";    
+		break;
+		case 2:
+		$tosend = "dobbiamo vendere 3400 pezzi, preparate gli uptates";    
+		break;
+		case 3:
+		$tosend = "Portate un bel po' di figa che tira più quella del visionfit";    
+		break;
+		case 4:
+		$tosend = "avete preparato 2 2win, 3 visionfit sc, 8 panini, 1 porchetta, 4 paia di stivali e l'ombrello?";    
+		break;
+		case 5:
+		$tosend = "questa è l'ultima possibilità, poi andiamo alla fiera del pesce";    
+		break;
+		default:
+		$tosend = "no.";    
+	}    
+	$reply = true;
+}
+
 if (stristr($text, 'card') !== false or stristr($text, 'cardullo') !== false)
 {
 	switch ($random) {
@@ -110,23 +134,23 @@ if (stristr($text, 'card') !== false or stristr($text, 'cardullo') !== false)
 	$reply = true;
 }
 
-if (stristr($text, 'gigio') !== false)
+if (stristr($text, 'barbara') !== false)
 {
 	switch ($random) {
 		case 1:
-		$tosend = "gigio ricchiò, hai prodotto 2win? Lenti? OHL? OFL? OKL? OML?";
+		$tosend = "Sei andata in banca?";
 		break;
 		case 2:
-		$tosend = "bella maglia...";    
+		$tosend = "Sei tornata dalla banca?";    
 		break;
 		case 3:
-		$tosend = "Mio amico russo dice: Gigio ha manualità di mucca da latte";    
+		$tosend = "Non pagare! Paga! Non pagare! Paga!";    
 		break;
 		case 4:
-		$tosend = "se non hai volgia di fare nulla, va bene, ma è ovvio che il nulla non è come te lo avevo chiesto";    
+		$tosend = "Bella borsetta... del cazzo!";    
 		break;
 		default:
-		$tosend = "gigio ricchiò, hai prodotto 2win? Lenti? OHL? OFL? OKL? OML?";
+		$tosend = "Barbara, hai chiesto a Gianfranco?";
 	}
 	$reply = true;
 }
