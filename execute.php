@@ -65,6 +65,33 @@ if (stristr($text, 'tommy') !== false or stristr($text, 'tommaso') !== false)
 	$reply = true;
 }
 
+if (stristr($text, 'china') !== false or stristr($text, 'cinese') !== false or stristr($text, 'cinesi') !== false)
+{
+	switch ($random) {
+		case 1:
+		$tosend = "...tu plende 2win e fa picolo e che lui collegge da solo la leflazione... ah e costa zelo eulo!";    
+		break;
+		case 2:
+		$tosend = "ragazzi qui bisgona cambiare tutto, dobbiamo rifare tutto, cancellate tutto";    
+		break;
+		case 3:
+		$tosend = "Il cinese ha detto che la terra è piatta quindi da oggi basta gps";    
+		break;
+		case 4:
+		$tosend = "Nel visionfit ci sono dentro 7 computer,e pensa che si parlano in seriale!";    
+		break;
+		case 5:
+		$tosend = "lui compla adaptica e non vuole palacallo di melda..";    
+		break;
+		case 6:
+		$tosend = "abbiamo online un servizio di cloud, sapevatelo!";    
+		break;
+		default:
+		$tosend = "da oggi solo cani al forno a pranzo!";    
+	}    
+	$reply = true;
+}
+
 if (stristr($text, 'fiera') !== false)
 {
 	switch ($random) {
