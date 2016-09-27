@@ -86,15 +86,19 @@ function mergeKeyWords($keys)
 		}
 	}
 	print_r($sentences);
-	if (count($sentences)==0) $toret = "Not existing Keywords";
-	foreach ($keys as $w)
-	{
-		$thefile = "./$w.txt";
-		file_put_contents($thefile, "");
-		foreach ($sentences as $sent)
-		{
-			$sent = preg_replace('~[\r\n]+~', '', $sent);
-			$myfile = file_put_contents($thefile, $sent.PHP_EOL , FILE_APPEND | LOCK_EX);
+	echo count($sentences);
+	if (count($sentences)===0)
+		$toret = "Not existing Keywords";
+	else {
+			foreach ($keys as $w)
+			{
+				$thefile = "./$w.txt";
+				file_put_contents($thefile, "");
+				foreach ($sentences as $sent)
+				{
+					$sent = preg_replace('~[\r\n]+~', '', $sent);
+				$myfile = file_put_contents($thefile, $sent.PHP_EOL , FILE_APPEND | LOCK_EX);
+			}
 		}
 	}
 	return $toret;
@@ -108,7 +112,9 @@ if(!$update)
 	//echo getKeyWords();
 	//echo getSentence("ivan");
 	//echo addSentence("ivan","vomito");
-	//echo mergeKeyWords(["ivan","eede"]);
+	$casso =  mergeKeyWords(["t","y"]);
+	echo "\nOHI\n";
+	echo $casso;
 	exit;
 }
 
