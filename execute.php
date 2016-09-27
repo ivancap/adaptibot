@@ -63,6 +63,7 @@ function mergeKeyWords($keys)
 {
 	$sentences=[];
 	$files = glob('./*.txt');
+	$toret="Merge Done!";
 	foreach ($keys as $w)
 	{
 		if (in_array("./$w.txt", $files, true)) {
@@ -85,7 +86,7 @@ function mergeKeyWords($keys)
 		}
 	}
 	print_r($sentences);
-	if (count($sentences)==0) return "Not existing Keywords";
+	if (count($sentences)==0) $toret = "Not existing Keywords";
 	foreach ($keys as $w)
 	{
 		$thefile = "./$w.txt";
@@ -96,7 +97,7 @@ function mergeKeyWords($keys)
 			$myfile = file_put_contents($thefile, $sent.PHP_EOL , FILE_APPEND | LOCK_EX);
 		}
 	}
-	return "Merge Done!";
+	return $toret;
 }
 
 
