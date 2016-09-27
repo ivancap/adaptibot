@@ -188,7 +188,7 @@ if (stristr($text, '/merge') !== false)
 		$keystomerge = [$words[1],$words[2]];
 		$reply = true;
 		$command = true;
-		$tosend = mergeKeyWords($keys);
+		$tosend = mergeKeyWords($keystomerge);
 	}
 }
 
