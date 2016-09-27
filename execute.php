@@ -220,7 +220,7 @@ if (stristr($text, '/sentences') !== false)
 if ($command==false)
 {
 	$reply = true;
-	$tosend = getSentences($text);
+	$tosend = getSentence($text);
 }
 
 
