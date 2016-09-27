@@ -65,6 +65,33 @@ if (stristr($text, 'tommy') !== false or stristr($text, 'tommaso') !== false)
 	$reply = true;
 }
 
+if (stristr($text, 'teoria') !== false or stristr($text, 'idea') !== false or stristr($text, 'facciamo') !== false)
+{
+	switch ($random) {
+		case 1:
+		$tosend = "Dunque, se tu moduli la luce come i cancelli, cioè la accendi e la spegni, perdonami... si effettua un filtraggio spettrale... infatti tu lo puoi usare il cancello alla luce del sole, ecco il 2win deve funzionare come i cancelli automatici!";    
+		break;
+		case 2:
+		$tosend = "Se attui la lente a mano e fai una tabella di valori e poi un controllo in modo che i valori non snappino e misuri con il righello la distanza dalla membrana vedi che si riesce a fare quello che dico... è facile. ";    
+		break;
+		case 3:
+		$tosend = "Il visionfit deve essere see through, ma con una scatoletta nera e delle lenti piccole, ma anche devi guardare il chart, ma ci deve stare dentro alla scatoletta nera, e deve avere un buco sopra per inserirci le monetine, così, una monetina alla volta vedi poi, ma se inserisci 2 centesimi deve stampare nell'altra scatoletta nera.";    
+		break;
+		case 4:
+		$tosend = "Io farei, scusami, 9 curve, ciascuna ad ogni punto contiene una curva, che l'utente sceglie e gli viene un indicatore con il colore del fondello cambiato, ma decidi tu. Però rosso.";    
+		break;
+		case 5:
+		$tosend = "Con il rapporto del led centrale e quello esterno per radice del numero di pixels, senza antialiasing, e un coefficiente modificato dalla funzione di trasferimento basata sul numero di scarpa, funziona benissimo, lo ho visto con i miei occhi. Dati? No non ne ho, ma lo ho visto con i miei occhi.";    
+		break;
+		case 6:
+		$tosend = "Tipo no, l'estrattore della batteria, avrei pensato ad un estrattore a succhi gastrici.";    
+		break;
+		default:
+		$tosend = "No! Ascoltami. Tu non sai, io ho già fatto questo e ti assicuto che è sbagliato, tu non vuoi capire.";    
+	}    
+	$reply = true;
+}
+
 if (stristr($text, 'china') !== false or stristr($text, 'cinese') !== false or stristr($text, 'cinesi') !== false)
 {
 	switch ($random) {
