@@ -351,7 +351,7 @@ if (strpos($text, 'valentina') !== false)
 {
 	switch ($random) {
 		case 1:
-		$tosend = "NOOOO!!!!";    
+		$tosend="goo.gl/Q3RUO4";    
 		break;
 		case 2:
 		$tosend = "Ha fatto la tinta?";    
