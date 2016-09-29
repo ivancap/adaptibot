@@ -52,11 +52,28 @@ function getSentences($keyword)
 	$thefile = "./$keyword.txt";
 	$lines = file($thefile);
 	$toret="";
-	foreach ($lines as $f)
-	{
-		$toret=$toret . "- $f";
-	}
+	for ($x = 0; $x <= count($lines); $x++) {
+		$toret=$toret . "$x- $lines[$x]";
+	} 
 	return $toret;
+}
+
+function removeSentence($keyword,$index)
+{	
+	$thefile = "./$keyword.txt";
+	$lines = file($thefile);
+	$toret="";
+	//file_put_contents($thefile, "");
+	unlink($thefile);
+	for ($x = 0; $x <= count($lines); $x++) {
+		$toadd = preg_replace('~[\r\n]+~', '', $lines[$x]);
+		if ($x!=$index) 
+		{
+			if ($toadd!='~[\r\n]+~')
+			file_put_contents($thefile,$toadd.PHP_EOL , FILE_APPEND | LOCK_EX);	
+		}	
+	} 
+	
 }
 
 function mergeKeyWords($keys)
@@ -97,7 +114,7 @@ function mergeKeyWords($keys)
 				foreach ($sentences as $sent)
 				{
 					$sent = preg_replace('~[\r\n]+~', '', $sent);
-				$myfile = file_put_contents($thefile, $sent.PHP_EOL , FILE_APPEND | LOCK_EX);
+					$myfile = file_put_contents($thefile, $sent.PHP_EOL , FILE_APPEND | LOCK_EX);
 			}
 		}
 	}
@@ -108,13 +125,14 @@ function mergeKeyWords($keys)
 
 if(!$update)
 {
-	//echo getSentences("ivan");
+	//echo removeSentence("ivan",0);
+	echo getSentences("ivan");
 	//echo getKeyWords();
 	//echo getSentence("ivan");
-	//echo addSentence("ivan","vomito");
-	$casso =  mergeKeyWords(["t","y"]);
-	echo "\nOHI\n";
-	echo $casso;
+	//echo addSentence("ivan","vomito minchione stronzo222e");
+    //$$casso =  mergeKeyWords(["ivan","ivano"]);
+	//echo "\nOHI\n";
+	// echo $casso;
 	exit;
 }
 
@@ -146,7 +164,7 @@ $command = false;
 if (stristr($text, '/add') !== false)
 {
 	$words = explode(" ", $text);
-	if (count($words)!=3) 
+	if (count($words)<3) 
 	{
 		$reply = true;
 		$command = true;
@@ -154,6 +172,10 @@ if (stristr($text, '/add') !== false)
 	}
 	else
 	{
+		$toadd=[];
+		for ($x = 2; $x <= count($words)-2; $x++) {
+			array_push($toadd,$words[$x]);
+		} 
 		addSentence($words[1],$words[2]);
 		$reply = true;
 		$command = true;
