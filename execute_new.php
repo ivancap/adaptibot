@@ -1,9 +1,79 @@
 <?php
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
+$disableSync=0;
+
+
+function syncFTPdown(){
+	if ($disableSync) return -1;
+	$sinkOk = true;
+	$files = glob('./*.txt');
+	if (count($files)!=0) return -1;
+	
+	header("Content-Type: application/json");
+	$parameters = array('chat_id' => $chatId, "text" => "Aspetta che mi ripiglio..");
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
+	
+	$ftp_server = "ftp.drivehq.com";
+	$ftp_user_name = "proprioivan@yahoo.it";
+	$ftp_user_pass = "ciaociao";
+	$conn_id = ftp_connect($ftp_server);
+	// login with username and password
+	$login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+	if ($login_result==1){
+		ftp_pasv($conn_id, true);
+		echo "RESULTS:";
+		$contents = ftp_nlist($conn_id, "");
+		print_r($contents);
+		foreach ($contents as $file) {
+   		 	$local_file = $file;
+   		 	$server_file = $file;
+   		 	$sinkOk = $sinkOk & ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
+		}
+	}
+// output $contents
+	ftp_close($conn_id);
+	return $sinkOk;
+}
+
+function syncFTPup(){
+	if ($disableSync) return -1;
+	
+	header("Content-Type: application/json");
+	$parameters = array('chat_id' => $chatId, "text" => "Zio boja quanto lavoro...");
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
+	
+	$ftp_server = "ftp.drivehq.com";
+	$ftp_user_name = "proprioivan@yahoo.it";
+	$ftp_user_pass = "ciaociao";
+	$conn_id = ftp_connect($ftp_server);
+	// login with username and password
+	$login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+	$sinkOk = true;
+	if ($login_result==1){
+		ftp_pasv($conn_id, true);
+		echo "RESULTS:";
+		$files = glob('./*.txt');
+		print_r($files);
+		foreach ($files as $file) {
+   		 	$local_file = substr($file, 2); 
+   		 	$server_file = substr($file, 2); 
+			echo $local_file;
+			echo $server_file;
+   		 	$sinkOk = $sinkOk & ftp_put($conn_id, $server_file, $local_file,FTP_BINARY);
+		}
+	}
+// output $contents
+	ftp_close($conn_id);
+	return $sinkOk;
+}
 
 function getSentence($values)
 {
+	$syncing = syncFTPdown();
+	if ($syncing==0) return "SYNC FAIL";
 	$words = explode(" ", $values);
 	$files = glob('./*.txt');
 	$thefile = "";
@@ -29,10 +99,15 @@ function addSentence($keyword,$sentence)
 	$thefile="./$keyword.txt";
 	$toadd = "\n$sentence";
 	$myfile = file_put_contents($thefile, $sentence.PHP_EOL , FILE_APPEND | LOCK_EX);
+	$syncing = syncFTPup();
+	if ($syncing==0) return "Mi sono arrotato!";
+	else return "Ecco, il tuo volere è esaudito!";
 }
 
 function getKeyWords()
 {
+	$syncing = syncFTPdown();
+	if ($syncing==0) return "Non riesco, non riesco orco zoppo!";
 	$files = glob('./*.txt');
 	$toret="";
 	foreach ($files as $f)
@@ -47,6 +122,8 @@ function getKeyWords()
 
 function getSentences($keyword)
 {
+	$syncing = syncFTPdown();
+	if ($syncing==0) return "Nooo, mi sono perso...";
 	$files = glob('./*.txt');
 	$thefile = "";	
 	$thefile = "./$keyword.txt";
@@ -73,7 +150,9 @@ function removeSentence($keyword,$index)
 			file_put_contents($thefile,$toadd.PHP_EOL , FILE_APPEND | LOCK_EX);	
 		}	
 	} 
-	
+	$syncing = syncFTPup();
+	if ($syncing==0) return "Ho avuto seri problemi...";
+	else return "Tu sei il mio guru, ecco fatto!";	
 }
 
 function mergeKeyWords($keys)
@@ -118,18 +197,21 @@ function mergeKeyWords($keys)
 			}
 		}
 	}
-	return $toret;
+	$syncing = syncFTPup();
+	if ($syncing==0) return "Ho sboccato blu!";
+	else return $toret; 
 }
 
 
 
 if(!$update)
 {
+	//echo syncFTPup();
 	//echo removeSentence("ivan",0);
-	echo getSentences("ivan");
+	// getSentences("ivan");
 	//echo getKeyWords();
 	//echo getSentence("ivan");
-	//echo addSentence("ivan","vomito minchione stronzo222e");
+	echo addSentence("ivan","MERDA");
     //$$casso =  mergeKeyWords(["ivan","ivano"]);
 	//echo "\nOHI\n";
 	// echo $casso;
@@ -179,12 +261,13 @@ if (stristr($text, '/add') !== false)
 		addSentence($words[1],$words[2]);
 		$reply = true;
 		$command = true;
-		$tosend = "add sentence $words[2] with keyword $words[1]";
+	    $tosend = "add sentence $words[2] with keyword $words[1]";
 	}
 }
 
 if (stristr($text, '/keys') !== false)
 {
+	
 	$words = explode(" ", $text);
 	if (count($words)!=1) 
 	{
@@ -194,7 +277,6 @@ if (stristr($text, '/keys') !== false)
 	}
 	else
 	{
-		addSentence($words[1],$words[2]);
 		$reply = true;
 		$command = true;
 		$tosend = getKeyWords();
