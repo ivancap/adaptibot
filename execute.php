@@ -242,6 +242,34 @@ if (stristr($text, 'mino') !== false or stristr($text, 'cosmo') !== false)
 	$reply = true;
 }
 
+if (stristr($text, 'update') !== false or stristr($text, 'aggiornamento') !== false)
+{
+	switch ($random) {
+		case 1:
+		$tosend = "crasha";    
+		break;
+		case 2:
+		$tosend = "Mattia i permessi!!!!";    
+		break;
+		case 3:
+		$tosend = "quale 4.1.1239549 4.1.23942034 4.1.0950234234 o 4.1.CAZZZO!!!!";    
+		break;
+		case 4:
+		$tosend = "Tanto la versione è bacata!";    
+		break;
+		case 5:
+		$tosend = "hai messo le curve...";    
+		break;
+		case 6:
+		$tosend = "hai messo la screening table con i coefficienti a 3 cifre decimali ";    
+		break;
+		default:
+		$tosend = "La checklist? Ah no, non serve...";
+	}
+	$reply = true;
+}
+
+
 if (stristr($text, 'giangi') !== false or stristr($text, 'gianluigi') !== false)
 {
 	switch ($random) {
