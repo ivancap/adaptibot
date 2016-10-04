@@ -1,10 +1,11 @@
 <?php
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
-$disableSync=0;
+$disableSync = true;
 
 
 function syncFTPdown(){
+	global $disableSync;
 	if ($disableSync) return -1;
 	$sinkOk = true;
 	$files = glob('./*.txt');
@@ -38,7 +39,12 @@ function syncFTPdown(){
 }
 
 function syncFTPup(){
-	if ($disableSync) return -1;
+	global $disableSync;
+	if ($disableSync) 
+	{
+		echo "DONOTHING";
+		return -1;
+	}
 	
 	header("Content-Type: application/json");
 	$parameters = array('chat_id' => $chatId, "text" => "Zio boja quanto lavoro...");
@@ -79,6 +85,7 @@ function getSentence($values)
 	$thefile = "";
 	foreach ($words as $w)
 	{
+		$w = strtolower($w);
 		//echo "searching  ./$w.txt";
 		if (in_array("./$w.txt", $files, true)) {
 			$thefile = "./$w.txt";
@@ -96,6 +103,7 @@ function getSentence($values)
 
 function addSentence($keyword,$sentence)
 {
+	$keyword = strtolower($keyword);
 	$thefile="./$keyword.txt";
 	$toadd = "\n$sentence";
 	$myfile = file_put_contents($thefile, $sentence.PHP_EOL , FILE_APPEND | LOCK_EX);
@@ -126,6 +134,7 @@ function getSentences($keyword)
 	if ($syncing==0) return "Nooo, mi sono perso...";
 	$files = glob('./*.txt');
 	$thefile = "";	
+	$keyword = strtolower($keyword);
 	$thefile = "./$keyword.txt";
 	$lines = file($thefile);
 	$toret="";
@@ -137,22 +146,29 @@ function getSentences($keyword)
 
 function removeSentence($keyword,$index)
 {	
+	$keyword = strtolower($keyword);
 	$thefile = "./$keyword.txt";
 	$lines = file($thefile);
 	$toret="";
 	//file_put_contents($thefile, "");
+	print_r($lines);
 	unlink($thefile);
 	for ($x = 0; $x <= count($lines); $x++) {
 		$toadd = preg_replace('~[\r\n]+~', '', $lines[$x]);
 		if ($x!=$index) 
 		{
-			if ($toadd!='~[\r\n]+~')
-			file_put_contents($thefile,$toadd.PHP_EOL , FILE_APPEND | LOCK_EX);	
+			echo "$toadd $counter \n" ;
+			$counter=strlen(trim($toadd));
+			if ($counter>1){
+				echo "ADDING: $toadd $counter\n" ;
+				file_put_contents($thefile,$toadd.PHP_EOL , FILE_APPEND | LOCK_EX);	
+			}
 		}	
 	} 
 	$syncing = syncFTPup();
 	if ($syncing==0) return "Ho avuto seri problemi...";
 	else return "Tu sei il mio guru, ecco fatto!";	
+		
 }
 
 function mergeKeyWords($keys)
@@ -162,6 +178,7 @@ function mergeKeyWords($keys)
 	$toret="Merge Done!";
 	foreach ($keys as $w)
 	{
+		$w = strtolower($w);
 		if (in_array("./$w.txt", $files, true)) {
 			echo "TROVATO";
 			$thefile = "./$w.txt";
@@ -188,6 +205,7 @@ function mergeKeyWords($keys)
 	else {
 			foreach ($keys as $w)
 			{
+				$w = strtolower($w);
 				$thefile = "./$w.txt";
 				file_put_contents($thefile, "");
 				foreach ($sentences as $sent)
@@ -208,13 +226,14 @@ if(!$update)
 {
 	//echo syncFTPup();
 	//echo removeSentence("ivan",0);
-	// getSentences("ivan");
+	//echo getSentences("ivan");
 	//echo getKeyWords();
-	//echo getSentence("ivan");
-	echo addSentence("ivan","MERDA");
-    //$$casso =  mergeKeyWords(["ivan","ivano"]);
+	//echo getSentence("Ivan");
+	//echo addSentence("ivan","MERDA3");
+    //echo  mergeKeyWords(["ivan","ivano"]);
 	//echo "\nOHI\n";
 	// echo $casso;
+//	echo "Adaptibot 2.0\nI have now the following commands:\n/add key1 sentence, used to add a sentence to a keyword\n/keys, used to get all the present keys\n/sentences key, used to retrieve the sentences for a keyword\n/nmerge key1 key2, used to merge the sentences for 2 keywords.\nSometime i have to sync with server, so be patient and dont fuck up!";
 	exit;
 }
 
@@ -240,7 +259,12 @@ $command = false;
 
 
 
-
+if (stristr($text, '/help') !== false)
+{
+	$reply = true;
+	$command = true;
+    $tosend = "Adaptibot 2.0\nI have now the following commands:\n/add key1 sentence, used to add a sentence to a keyword\n/keys, used to get all the present keys\n/sentences key, used to retrieve the sentences for a keyword\n/merge key1 key2, used to merge the sentences for 2 keywords.\nSometime i have to sync with server, so be patient and dont fuck up!";
+}
 
 
 if (stristr($text, '/add') !== false)
