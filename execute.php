@@ -9,6 +9,7 @@ function syncFTPdown(){
 	if ($disableSync) return -1;
 	$sinkOk = true;
 	$files = glob('./*.txt');
+	error_log("File Count $files");
 	if (count($files)!=0) return -1;
 	
 	header("Content-Type: application/json");
@@ -22,6 +23,7 @@ function syncFTPdown(){
 	$conn_id = ftp_connect($ftp_server);
 	// login with username and password
 	$login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+	error_log("Access Granted");
 	if ($login_result==1){
 		ftp_pasv($conn_id, true);
 		echo "RESULTS:";
@@ -33,6 +35,7 @@ function syncFTPdown(){
    		 	$sinkOk = $sinkOk & ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
 		}
 	}
+	else return -1;
 // output $contents
 	ftp_close($conn_id);
 	return $sinkOk;
@@ -79,7 +82,7 @@ function syncFTPup(){
 function getSentence($values)
 {
 	$syncing = syncFTPdown();
-	if ($syncing==0) return "SYNC FAIL";
+	if ($syncing==-1) return "SYNC FAIL";
 	$words = explode(" ", $values);
 	$files = glob('./*.txt');
 	$thefile = "";
@@ -108,7 +111,7 @@ function addSentence($keyword,$sentence)
 	$toadd = "\n$sentence";
 	$myfile = file_put_contents($thefile, $sentence.PHP_EOL , FILE_APPEND | LOCK_EX);
 	$syncing = syncFTPup();
-	if ($syncing==0) return "Mi sono arrotato!";
+	if ($syncing==-1) return "Mi sono arrotato!";
 	else return "Ecco, il tuo volere è esaudito!";
 }
 
@@ -117,7 +120,7 @@ function getKeyWords()
 	error_log("Start Sink!");
 	$syncing = syncFTPdown();
 	error_log("stop Sink $syncing" );
-	if ($syncing==0) return "Non riesco, non riesco orco zoppo!";
+	if ($syncing==-1) return "Non riesco, non riesco orco zoppo!";
 	$files = glob('./*.txt');
 	$toret="";
 	foreach ($files as $f)
@@ -133,7 +136,7 @@ function getKeyWords()
 function getSentences($keyword)
 {
 	$syncing = syncFTPdown();
-	if ($syncing==0) return "Nooo, mi sono perso...";
+	if ($syncing==-1) return "Nooo, mi sono perso...";
 	$files = glob('./*.txt');
 	$thefile = "";	
 	$keyword = strtolower($keyword);
@@ -168,7 +171,7 @@ function removeSentence($keyword,$index)
 		}	
 	} 
 	$syncing = syncFTPup();
-	if ($syncing==0) return "Ho avuto seri problemi...";
+	if ($syncing==-1) return "Ho avuto seri problemi...";
 	else return "Tu sei il mio guru, ecco fatto!";	
 		
 }
@@ -218,7 +221,7 @@ function mergeKeyWords($keys)
 		}
 	}
 	$syncing = syncFTPup();
-	if ($syncing==0) return "Ho sboccato blu!";
+	if ($syncing==-1) return "Ho sboccato blu!";
 	else return $toret; 
 }
 
