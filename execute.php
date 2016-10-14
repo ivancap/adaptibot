@@ -114,7 +114,9 @@ function addSentence($keyword,$sentence)
 
 function getKeyWords()
 {
+	error_log("Start Sink!");
 	$syncing = syncFTPdown();
+	error_log("stop Sink $syncing" );
 	if ($syncing==0) return "Non riesco, non riesco orco zoppo!";
 	$files = glob('./*.txt');
 	$toret="";
