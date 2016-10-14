@@ -35,7 +35,7 @@ function syncFTPdown(){
    		 	$sinkOk = $sinkOk & ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
 		}
 	}
-	else return -1;
+	else return 0;
 // output $contents
 	ftp_close($conn_id);
 	return $sinkOk;
@@ -74,6 +74,8 @@ function syncFTPup(){
    		 	$sinkOk = $sinkOk & ftp_put($conn_id, $server_file, $local_file,FTP_BINARY);
 		}
 	}
+	else return 0;
+	
 // output $contents
 	ftp_close($conn_id);
 	return $sinkOk;
@@ -82,7 +84,7 @@ function syncFTPup(){
 function getSentence($values)
 {
 	$syncing = syncFTPdown();
-	if ($syncing==-1) return "SYNC FAIL";
+	if ($syncing==0) return "SYNC FAIL";
 	$words = explode(" ", $values);
 	$files = glob('./*.txt');
 	$thefile = "";
@@ -111,7 +113,7 @@ function addSentence($keyword,$sentence)
 	$toadd = "\n$sentence";
 	$myfile = file_put_contents($thefile, $sentence.PHP_EOL , FILE_APPEND | LOCK_EX);
 	$syncing = syncFTPup();
-	if ($syncing==-1) return "Mi sono arrotato!";
+	if ($syncing==0) return "Mi sono arrotato!";
 	else return "Ecco, il tuo volere è esaudito!";
 }
 
@@ -120,7 +122,7 @@ function getKeyWords()
 	error_log("Start Sink!");
 	$syncing = syncFTPdown();
 	error_log("stop Sink $syncing" );
-	if ($syncing==-1) return "Non riesco, non riesco orco zoppo!";
+	if ($syncing==0) return "Non riesco, non riesco orco zoppo!";
 	$files = glob('./*.txt');
 	$toret="";
 	foreach ($files as $f)
@@ -136,7 +138,7 @@ function getKeyWords()
 function getSentences($keyword)
 {
 	$syncing = syncFTPdown();
-	if ($syncing==-1) return "Nooo, mi sono perso...";
+	if ($syncing==0) return "Nooo, mi sono perso...";
 	$files = glob('./*.txt');
 	$thefile = "";	
 	$keyword = strtolower($keyword);
@@ -171,7 +173,7 @@ function removeSentence($keyword,$index)
 		}	
 	} 
 	$syncing = syncFTPup();
-	if ($syncing==-1) return "Ho avuto seri problemi...";
+	if ($syncing==0) return "Ho avuto seri problemi...";
 	else return "Tu sei il mio guru, ecco fatto!";	
 		
 }
@@ -221,7 +223,7 @@ function mergeKeyWords($keys)
 		}
 	}
 	$syncing = syncFTPup();
-	if ($syncing==-1) return "Ho sboccato blu!";
+	if ($syncing==0) return "Ho sboccato blu!";
 	else return $toret; 
 }
 
