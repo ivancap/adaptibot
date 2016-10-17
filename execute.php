@@ -270,7 +270,7 @@ if (stristr($text, '/help') !== false)
 {
 	$reply = true;
 	$command = true;
-    $tosend = "Adaptibot 2.0\nI have now the following commands:\n/add key1 sentence, used to add a sentence to a keyword\n/keys, used to get all the present keys\n/sentences key, used to retrieve the sentences for a keyword\n/merge key1 key2, used to merge the sentences for 2 keywords.\nSometime i have to sync with server, so be patient and dont fuck up!";
+    $tosend = "Adaptibot 2.0\nI have now the following commands:\n/add key1 sentence, used to add a sentence to a keyword\n/keys, used to get all the present keys\n/sentences key, used to retrieve the sentences for a keyword\n/merge key1 key2, used to merge the sentences for 2 keywords\n/remove key number, used to remove number sentencence from jeyword key.\nSometime i have to sync with server, so be patient and dont fuck up!";
 }
 
 
@@ -293,6 +293,24 @@ if (stristr($text, '/add') !== false)
 		$reply = true;
 		$command = true;
 	    $tosend = "add sentence $words[2] with keyword $words[1]";
+	}
+}
+
+if (stristr($text, '/remove') !== false)
+{
+	$words = explode(" ", $text);
+	if (count($words)<3) 
+	{
+		$reply = true;
+		$command = true;
+		$tosend = "add command needs 2 parameter, the keyword and the number!";
+	}
+	else
+	{
+		removeSentence($words[1],$words[2]);
+		$reply = true;
+		$command = true;
+	    $tosend = "sentence Removed!";
 	}
 }
 
