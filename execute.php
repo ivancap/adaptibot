@@ -314,6 +314,14 @@ if (stristr($text, '/remove') !== false)
 	}
 }
 
+if (stristr($text, '/syncdown') !== false)
+{
+	$syncing = syncFTPdown();
+	$command = true;
+	$reply = true;
+	$tosend = "sync done";
+}
+
 if (stristr($text, '/keys') !== false)
 {
 	
