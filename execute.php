@@ -289,10 +289,10 @@ if (stristr($text, '/add') !== false)
 		for ($x = 2; $x <= count($words)-2; $x++) {
 			array_push($toadd,$words[$x]);
 		} 
-		addSentence($words[1],$words[2]);
+		addSentence($words[1],$toadd);
 		$reply = true;
 		$command = true;
-	    $tosend = "add sentence $words[2] with keyword $words[1]";
+	    $tosend = "add sentence $toadd with keyword $words[1]";
 	}
 }
 
