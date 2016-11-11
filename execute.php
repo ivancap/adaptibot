@@ -108,6 +108,7 @@ function getSentence($values)
 
 function addSentence($keyword,$sentence)
 {
+	echo $sentence;
 	$keyword = strtolower($keyword);
 	$thefile="./$keyword.txt";
 	$toadd = "\n$sentence";
@@ -236,7 +237,7 @@ if(!$update)
 	//echo getSentences("ivan");
 	//echo getKeyWords();
 	//echo getSentence("Ivan");
-	//echo addSentence("ivan","MERDA3");
+	//echo addSentence("aldo","cazzo ");
     //echo  mergeKeyWords(["ivan","ivano"]);
 	//echo "\nOHI\n";
 	// echo $casso;
@@ -290,13 +291,9 @@ if (stristr($text, '/add') !== false)
 			array_push($toadd,$words[$x]);
 		} 
 		
-		$toaddsentce ="";
-		foreach($toadd as $piece)
-		{
-			$toaddsentce = $toaddsentce +" "+$piece;
-		}
 		
-		addSentence($words[1],$toaddsentce);
+		
+		addSentence($words[1],implode(" ", $toadd));
 		$reply = true;
 		$command = true;
 	    $tosend = "add sentence $toadd with keyword $words[1]";
