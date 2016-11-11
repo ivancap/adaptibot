@@ -287,7 +287,7 @@ if (stristr($text, '/add') !== false)
 	else
 	{
 		$toadd=[];
-		for ($x = 1; $x <= count($words)-1; $x++) {
+		for ($x = 2; $x <= count($words)-1; $x++) {
 			array_push($toadd,$words[$x]);
 		} 
 		
